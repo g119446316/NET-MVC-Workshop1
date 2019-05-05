@@ -1,0 +1,77 @@
+﻿@model IEnumerable<workshop.Models.BOOK_G>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "HOME", FormMethod.Get))
+    {
+    <p>
+        書名：@Html.TextBox("Sbookname")
+        <br>
+        圖書類別：@Html.DropDownList("Sclassname", "select")
+        <br>
+        借閱人：@Html.DropDownList("Sbrrower", "select")
+        <br>
+        借閱狀態：@Html.DropDownList("Sstatus", "select")
+        <br>
+        <input type="submit" value="查詢">
+        <input type="reset" value="清除">
+
+    </p>
+}
+   
+    </p>
+    <p>
+        @Html.ActionLink("新增", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    圖書類別
+                </th>
+                <th>
+                    書名
+                </th>
+                <th>
+                    購書日期
+                </th>
+                <th>
+                    借閱狀態
+                </th>
+                <th>
+                    借閱人
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BOOK_CLASS_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BOOK_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BOOK_BOUGHTDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BOOK_STATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BOOK_BRROWER)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BOOK_ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { BOOK_ID = item.BOOK_ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
